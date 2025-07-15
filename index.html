@@ -1,23 +1,18 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.gstatic.com https://apis.google.com 'unsafe-inline' 'unsafe-eval' blob: data:;">
-
-  <script src="https://apis.google.com/js/api.js"></script>
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.gstatic.com https://apis.google.com 'unsafe-inline' 'unsafe-eval' blob: data:;">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.gstatic.com https://apis.google.com 'unsafe-inline' 'unsafe-eval' blob: data:;">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.gstatic.com https://apis.google.com 'unsafe-inline' 'unsafe-eval' blob: data:;">
-
+  <script src="https://apis.google.com/js/api.js" defer></script>
+  <title>Google Drive OAuth Test</title>
 </head>
 <body>
-  <button onclick="signIn()">Sign In</button>
+  <button id="signInBtn">Sign In</button>
 
 <script>
 const CLIENT_ID = '483671946870-mgk3v4svehjlfnilv5lei1mp23t80nnc.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
-function signIn() {
+document.getElementById('signInBtn').addEventListener('click', () => {
   gapi.load('client:auth2', () => {
     gapi.client.init({ clientId: CLIENT_ID, scope: SCOPES }).then(() => {
       gapi.auth2.getAuthInstance().signIn().then(() => {
@@ -25,7 +20,7 @@ function signIn() {
       });
     });
   });
-}
+});
 </script>
 
 </body>
