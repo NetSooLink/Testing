@@ -278,7 +278,7 @@
             msgDiv.classList.add('message');
             if(msg.type === 1 || msg.type === 2 || msg.type === 3 || msg.type === 4){
                 msgDiv.classList.add('accident-message');
-                sendNotification("Accident Reported", msg.text);
+               
             }else {
                 msgDiv.classList.add(msg.user_id === currentUser ? 'by-me' : 'by-others');
 
