@@ -1,1 +1,1 @@
-{ "alert": true, "title": "Emergency", "message": "Something happened!" }
+{ "alert": true, "title": "Emergency HIGH", "message": "Something happened!" }
