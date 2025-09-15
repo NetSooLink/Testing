@@ -278,7 +278,7 @@
             msgDiv.classList.add('message');
             if(msg.type === 1 || msg.type === 2 || msg.type === 3 || msg.type === 4){
                 msgDiv.classList.add('accident-message');
-                sendNotification("Accident Reported", msg.text);
+               
             }else {
                 msgDiv.classList.add(msg.user_id === currentUser ? 'by-me' : 'by-others');
 
@@ -297,19 +297,7 @@
 
         chatBody.scrollTop = chatBody.scrollHeight;
     }
-    function sendNotification(title, body) {
-        // Step 1: Check permission
-        if (Notification.permission === "granted") {
-            new Notification(title, { body });
-        } else if (Notification.permission !== "denied") {
-            // Step 2: Ask for permission
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    new Notification(title, { body });
-                }
-            });
-        }
-    }
+   
 function viewSentLocation(lat, long) {
         const url = `https://www.google.com/maps?q=${lat},${long}`;
         window.open(url, '_blank');
