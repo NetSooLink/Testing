@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Supabase Realtime Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <h2>Realtime Appointment Updates</h2>
+  <ul id="updates"></ul>
+
+  <script>
+    // Step 1: Initialize Supabase
+    const supabase = supabase.createClient(
+      'https://stnfjczuyfirpowepxta.supabase.co', // Replace with your Supabase URL
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0bmZqY3p1eWZpcnBvd2VweHRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzEyNjYsImV4cCI6MjA3MzM0NzI2Nn0.Qq9BArmjO0TolX0cU-dCUFBX6kibYYtEi0ge9rwYZ1U'                        // Replace with your Supabase anon key
+    );
+
+    // Step 2: Subscribe to changes in 'appointments' table
+    const channel = supabase
+      .channel('realtime-appointments')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // You can use 'INSERT', 'UPDATE', 'DELETE' or '*'
+          schema: 'public',
+          table: 'appointments'
+        },
+        (payload) => {
+          console.log('Change received:', payload);
+          const updatesList = document.getElementById('updates');
+          const newItem = document.createElement('li');
+          newItem.textContent = `Type: ${payload.eventType}, ID: ${payload.new?.id || payload.old?.id}`;
+          updatesList.appendChild(newItem);
+        }
+      )
+      .subscribe();
+  </script>
+</body>
+</html>
