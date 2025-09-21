@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Supabase Realtime Fix</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+ 
 </head>
 <body>
 <h2>Realtime Updates</h2>
@@ -10,32 +10,8 @@
 
 <script>
     // Wait until the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Step 1: Initialize Supabase
-        const supabaseUrl = 'https://stnfjczuyfirpowepxta.supabase.co'; // Replace with your URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0bmZqY3p1eWZpcnBvd2VweHRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc3NzEyNjYsImV4cCI6MjA3MzM0NzI2Nn0.Qq9BArmjO0TolX0cU-dCUFBX6kibYYtEi0ge9rwYZ1U'; // Replace with your anon key
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+   console.log("WEBVIEWCOM: Patient registered");
 
-        // Step 2: Subscribe to changes
-        const channel = supabase
-            .channel('realtime-appointments')
-            .on(
-                'postgres_changes',
-                {
-                    event: '*',
-                    schema: 'public',
-                    table: 'CHAT'
-                },
-                (payload) => {
-                    console.log('Change received:', payload);
-                    const updatesList = document.getElementById('updates');
-                    const newItem = document.createElement('li');
-                    newItem.textContent = `Type: ${payload.eventType}, ID: ${payload.new?.id || payload.old?.id}`;
-                    updatesList.appendChild(newItem);
-                }
-            )
-            .subscribe();
-    });
 </script>
 </body>
 </html>
